@@ -1,6 +1,8 @@
 import { fetchFeed, Article } from "@/lib/rss";
 import { Section } from "@/lib/sections";
+import { POVS } from "@/lib/pov";
 import ArticleCard from "./ArticleCard";
+import PovCallout from "./PovCallout";
 
 export default async function Feed({ section }: { section: Section }) {
   const results = await Promise.all(
@@ -10,18 +12,24 @@ export default async function Feed({ section }: { section: Section }) {
     (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
   );
 
+  const pov = POVS[section.id] || "";
+
   return (
     <section>
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      <div className="mb-6">
+        <h2
+          className="text-2xl font-bold text-gray-900 mb-2"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
           {section.title}
         </h2>
-        <p className="text-gray-500 text-sm max-w-2xl"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        <p className="text-gray-500 text-sm max-w-2xl" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           {section.description}
         </p>
       </div>
+
+      <PovCallout text={pov} />
+
       {articles.length === 0 ? (
         <p className="text-gray-400 text-sm">No articles loaded yet.</p>
       ) : (

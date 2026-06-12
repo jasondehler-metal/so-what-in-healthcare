@@ -3,14 +3,20 @@ export type Article = {
   link: string;
   pubDate: string;
   source: string;
-  pinned?: boolean;
 };
 
 const EXCLUDE_TERMS = [
-  "hiring", "job", "jobs", "recruit", "career", "layoff", "laid off",
-  "pharma", "pharmaceutical", "drug", "fda approval", "clinical trial",
-  "medical device", "implant", "stent", "surgical", "orthopedic",
-  "biotech", "gene therapy", "oncology", "cancer drug", "vaccine",
+  // hiring / workforce noise
+  "we're hiring", "is hiring", "job opening", "open role", "layoff tracker",
+  "career", "laid off",
+  // pharma & devices (out of scope)
+  "pharmaceutical", "clinical trial", "medical device", "implant", "stent",
+  "surgical robot", "orthopedic", "gene therapy", "oncology", "cancer drug",
+  "vaccine", "drug approval", "fda clears", "fda approves",
+  // off-topic industries
+  "banking", "bank ", "fintech", "mortgage", "real estate", "retail",
+  "automotive", "supply chain", "manufacturing", "sports", "entertainment",
+  "cryptocurrency", "blockchain", "nft",
 ];
 
 function isRelevant(title: string): boolean {
@@ -20,9 +26,10 @@ function isRelevant(title: string): boolean {
 
 export async function fetchFeed(url: string, label: string): Promise<Article[]> {
   try {
-    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`, {
-      next: { revalidate: 3600 },
-    });
+    const res = await fetch(
+      `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
+      { next: { revalidate: 3600 } }
+    );
     if (!res.ok) return [];
     const data = await res.json();
     if (data.status !== "ok") return [];
