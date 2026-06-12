@@ -13,9 +13,9 @@ export const SECTIONS: Section[] = [
     description: "What HighMark, Elevance, HealthPartners, Cigna, and peers are doing with AI — member experience, prior auth, provider ops, and what's actually shipping.",
     color: "blue",
     feeds: [
-      { label: "AHIP", url: "https://www.ahip.org/feed/" },
-      { label: "Healthcare Dive", url: "https://www.healthcaredive.com/feeds/news/" },
-      { label: "Fierce Healthcare", url: "https://www.fiercehealthcare.com/rss/xml" },
+      { label: "Healthcare Dive – Payers", url: "https://www.healthcaredive.com/feeds/news/" },
+      { label: "Becker's Payer", url: "https://www.beckershospitalreview.com/rss/payer-issues.xml" },
+      { label: "Health Affairs", url: "https://www.healthaffairs.org/rss/site_1000002/1000002.xml" },
     ],
   },
   {
@@ -25,30 +25,30 @@ export const SECTIONS: Section[] = [
     color: "purple",
     feeds: [
       { label: "Rock Health", url: "https://rockhealth.com/feed/" },
-      { label: "STAT News", url: "https://www.statnews.com/category/artificial-intelligence/feed/" },
       { label: "Mobihealthnews", url: "https://www.mobihealthnews.com/rss.xml" },
+      { label: "a16z Bio", url: "https://a16z.com/tag/bio-health/feed/" },
     ],
   },
   {
     id: "regulated-ai",
     title: "AI in Regulated Healthcare",
-    description: "FDA clearances, CMS policy, HIPAA + AI, and what it actually takes to get an AI product into a payer or provider system.",
+    description: "CMS policy, HIPAA + AI, and what it actually takes to get an AI product into a payer or health plan — compliance, procurement, and governance.",
     color: "green",
     feeds: [
-      { label: "FDA Digital Health", url: "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml" },
-      { label: "Healthcare IT News", url: "https://www.healthcareitnews.com/rss.xml" },
-      { label: "Health Affairs", url: "https://www.healthaffairs.org/rss/site_1000002/1000002.xml" },
+      { label: "Healthcare IT News", url: "https://www.healthcareitnews.com/topic/artificial-intelligence/feed" },
+      { label: "NEJM AI", url: "https://ai.nejm.org/rss/current" },
+      { label: "Becker's Health IT", url: "https://www.beckershospitalreview.com/rss/healthcare-information-technology.xml" },
     ],
   },
   {
     id: "org-change",
     title: "Leading AI Transformation",
-    description: "How health system and payer leaders are actually driving AI adoption — not the vision decks, the change management, the politics, and what sticks.",
+    description: "How payer and digital health leaders are actually driving AI adoption — change management, the politics, and what sticks.",
     color: "orange",
     feeds: [
       { label: "NEJM Catalyst", url: "https://catalyst.nejm.org/rss/current" },
-      { label: "Becker's Health IT", url: "https://www.beckershospitalreview.com/rss/healthcare-information-technology.xml" },
       { label: "HBR Healthcare", url: "https://hbr.org/topic/subject/health-care/feed" },
+      { label: "MIT Tech Review – AI", url: "https://www.technologyreview.com/topic/artificial-intelligence/feed" },
     ],
   },
   {
