@@ -1,5 +1,6 @@
 import Feed from "@/components/Feed";
 import Header from "@/components/Header";
+import SlackFeed from "@/components/SlackFeed";
 import { SECTIONS } from "@/lib/sections";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
             What&apos;s actually happening at the intersection of AI and healthcare — for the clients we work with and want to work with.
           </p>
         </div>
+        <SlackFeed />
         {SECTIONS.map((section) => (
           <Feed key={section.id} section={section} />
         ))}
