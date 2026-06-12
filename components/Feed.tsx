@@ -2,6 +2,14 @@ import { fetchFeed, Article } from "@/lib/rss";
 import { Section } from "@/lib/sections";
 import ArticleCard from "./ArticleCard";
 
+const borderColors: Record<string, string> = {
+  blue: "#60a5fa",
+  purple: "#a78bfa",
+  green: "#34d399",
+  orange: "#fb923c",
+  magenta: "#C030B0",
+};
+
 export default async function Feed({ section }: { section: Section }) {
   const results = await Promise.all(
     section.feeds.map((f) => fetchFeed(f.url, f.label))
@@ -12,7 +20,7 @@ export default async function Feed({ section }: { section: Section }) {
 
   return (
     <section>
-      <div className="pl-4 mb-6" style={{ borderLeft: "4px solid #C030B0" }}>
+      <div className="pl-4 mb-6" style={{ borderLeft: `4px solid ${borderColors[section.color] || "#C030B0"}` }}>
         <h2
           className="text-xl font-bold"
           style={{ color: "#ffffff", fontFamily: "'DM Sans', sans-serif" }}
