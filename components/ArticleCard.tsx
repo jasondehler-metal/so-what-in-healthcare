@@ -1,3 +1,4 @@
+"use client";
 import { Article } from "@/lib/rss";
 
 function timeAgo(dateStr: string) {
@@ -15,15 +16,36 @@ export default function ArticleCard({ article }: { article: Article }) {
       href={article.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-gray-900 border border-gray-800 rounded-lg p-4 hover:border-gray-600 hover:bg-gray-800 transition-all group"
+      className="block rounded-lg p-4 transition-all group"
+      style={{
+        background: "#3a3a3a",
+        border: "1px solid #555555",
+        fontFamily: "'DM Sans', sans-serif",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = "#C030B0";
+        (e.currentTarget as HTMLElement).style.background = "#404040";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = "#555555";
+        (e.currentTarget as HTMLElement).style.background = "#3a3a3a";
+      }}
     >
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-medium text-blue-400 bg-blue-950 px-2 py-0.5 rounded-full">
+        <span
+          className="text-xs font-semibold px-2 py-0.5 rounded-full"
+          style={{
+            background: "linear-gradient(to right, #F2788A, #C030B0)",
+            color: "#ffffff",
+          }}
+        >
           {article.source}
         </span>
-        <span className="text-xs text-gray-500">{timeAgo(article.pubDate)}</span>
+        <span className="text-xs" style={{ color: "#999999" }}>
+          {timeAgo(article.pubDate)}
+        </span>
       </div>
-      <p className="text-sm text-gray-100 font-medium leading-snug group-hover:text-white line-clamp-3">
+      <p className="text-sm font-medium leading-snug" style={{ color: "#eeeeee" }}>
         {article.title}
       </p>
     </a>
