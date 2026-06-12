@@ -1,13 +1,10 @@
 "use client";
 import { Article } from "@/lib/rss";
 
-function timeAgo(dateStr: string) {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const hours = Math.floor(diff / 3600000);
-  if (hours < 1) return "just now";
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+function formatDate(dateStr: string) {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toUpperCase();
 }
 
 export default function ArticleCard({ article }: { article: Article }) {
@@ -16,38 +13,37 @@ export default function ArticleCard({ article }: { article: Article }) {
       href={article.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block rounded-lg p-4 transition-all group"
-      style={{
-        background: "#3a3a3a",
-        border: "1px solid #555555",
-        fontFamily: "'DM Sans', sans-serif",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "#C030B0";
-        (e.currentTarget as HTMLElement).style.background = "#404040";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "#555555";
-        (e.currentTarget as HTMLElement).style.background = "#3a3a3a";
-      }}
+      className="group flex flex-col bg-white border border-gray-100 rounded-sm hover:border-gray-300 transition-all"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
-      <div className="flex items-center justify-between mb-2">
+      {/* Source tag strip */}
+      <div
+        className="px-4 pt-4 pb-0"
+      >
         <span
-          className="text-xs font-semibold px-2 py-0.5 rounded-full"
-          style={{
-            background: "linear-gradient(to right, #F2788A, #C030B0)",
-            color: "#ffffff",
-          }}
+          className="text-xs font-semibold tracking-widest uppercase"
+          style={{ color: "#C030B0" }}
         >
           {article.source}
         </span>
-        <span className="text-xs" style={{ color: "#999999" }}>
-          {timeAgo(article.pubDate)}
-        </span>
       </div>
-      <p className="text-sm font-medium leading-snug" style={{ color: "#eeeeee" }}>
-        {article.title}
-      </p>
+
+      <div className="px-4 pt-3 pb-5 flex flex-col flex-1">
+        {/* Date — monospace style like the site */}
+        <div className="text-xs text-gray-400 mb-2 font-mono">
+          {formatDate(article.pubDate)}
+        </div>
+
+        {/* Title */}
+        <p className="text-sm font-bold text-gray-900 leading-snug group-hover:text-gray-600 transition-colors line-clamp-3 flex-1">
+          {article.title}
+        </p>
+
+        {/* CTA */}
+        <div className="mt-4 text-xs font-semibold tracking-wide text-gray-900 group-hover:text-pink-600 transition-colors">
+          READ ARTICLE →
+        </div>
+      </div>
     </a>
   );
 }
